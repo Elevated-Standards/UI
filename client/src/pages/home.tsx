@@ -14,7 +14,6 @@ import {
   Settings, 
   Image, 
   Globe,
-  Github,
   Globe2,
   Package,
   Rocket,
@@ -88,7 +87,7 @@ export default function Home() {
     { title: "Fully Typed", description: "Complete TypeScript support throughout the project", icon: <FileText className="h-8 w-8" /> },
     { title: "Responsive", description: "Mobile-first design approach with responsive components", icon: <Globe2 className="h-8 w-8" /> },
     { title: "Accessibility", description: "ARIA attributes and keyboard navigation support", icon: <Package className="h-8 w-8" /> },
-    { title: "Static Deploy", description: "Deploy as a static site to GitHub Pages or other hosts", icon: <Github className="h-8 w-8" /> }
+    { title: "Static Deploy", description: "Deploy as a static site to GitHub Pages or other hosts", icon: <Rocket className="h-8 w-8" /> }
   ];
 
   return (
@@ -105,12 +104,6 @@ export default function Home() {
             <Link href="/components/forms">
               Explore Components
             </Link>
-          </Button>
-          <Button size="lg" variant="outline" asChild>
-            <a href="https://github.com/yourusername/react-boilerplate-template" target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" />
-              GitHub
-            </a>
           </Button>
         </div>
       </section>

@@ -10,7 +10,6 @@ import {
   Settings, 
   Image, 
   Globe,
-  Github,
   Menu,
   X
 } from "lucide-react";
@@ -62,11 +61,7 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
           
-          <Button variant="ghost" size="sm" asChild>
-            <a href="https://github.com/yourusername/react-boilerplate-template" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-          </Button>
+
         </nav>
 
         {/* Mobile navigation */}
@@ -105,15 +100,7 @@ export function Navbar() {
                 <span className="ml-2">{link.label}</span>
               </Link>
             ))}
-            <a 
-              href="https://github.com/yourusername/react-boilerplate-template" 
-              className="flex items-center px-2 py-1.5 text-sm"
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Github className="h-4 w-4" />
-              <span className="ml-2">GitHub</span>
-            </a>
+
           </nav>
         </div>
       )}
