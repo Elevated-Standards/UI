@@ -1,14 +1,21 @@
 import React from "react";
-import { Bell, Menu, Moon, User } from "lucide-react";
+import { Bell, Menu, Moon, Sun, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 interface HeaderProps {
   onMenuClick: () => void;
 }
 
 export function Header({ onMenuClick }: HeaderProps) {
+  const { theme, setTheme } = useTheme();
+  
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+  
   return (
-    <header className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
+    <header className="sticky top-0 z-10 bg-card border-b shadow-sm">
       <div className="flex items-center justify-between px-6 py-3">
         <div className="flex items-center space-x-4">
           <Button
@@ -25,8 +32,12 @@ export function Header({ onMenuClick }: HeaderProps) {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="icon">
-            <Moon className="h-5 w-5" />
+          <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            {theme === 'dark' ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
             <span className="sr-only">Toggle theme</span>
           </Button>
           <Button variant="ghost" size="icon">
@@ -35,7 +46,7 @@ export function Header({ onMenuClick }: HeaderProps) {
           </Button>
           <div className="relative">
             <Button variant="ghost" size="icon" className="rounded-full">
-              <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
+              <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
                 <User className="h-5 w-5" />
               </div>
             </Button>
