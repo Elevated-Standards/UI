@@ -1,14 +1,222 @@
-import React from "react";
+import React, { useState } from "react";
 import { SectionContainer } from "./section-container";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { User, ChevronUp, BarChart } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { 
+  User, 
+  ChevronUp, 
+  ChevronDown, 
+  BarChart as BarChartIcon,
+  Check,
+  ArrowUp,
+  ArrowDown,
+  Filter,
+  CalendarDays,
+  BookOpen
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, LineChart, Line } from 'recharts';
+import { 
+  BarChart as RechartsBarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer, 
+  AreaChart, 
+  Area, 
+  LineChart, 
+  Line 
+} from 'recharts';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+  SortingState,
+} from '@tanstack/react-table';
+import { 
+  VerticalTimeline, 
+  VerticalTimelineElement 
+} from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+
+// TanStack Table Types
+type Person = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  visits: number;
+  status: string;
+  progress: number;
+};
+
+// Column helper for TanStack Table
+const columnHelper = createColumnHelper<Person>();
 
 export function DataDisplayComponents() {
+  // State for TanStack Table sorting
+  const [sorting, setSorting] = useState<SortingState>([]);
+  
+  // TanStack Table data
+  const tanStackData = [
+    {
+      id: '1',
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 28,
+      visits: 10,
+      status: 'active',
+      progress: 80,
+    },
+    {
+      id: '2',
+      firstName: 'Jane',
+      lastName: 'Smith',
+      age: 32,
+      visits: 5,
+      status: 'inactive',
+      progress: 45,
+    },
+    {
+      id: '3',
+      firstName: 'Robert',
+      lastName: 'Johnson',
+      age: 24,
+      visits: 15,
+      status: 'active',
+      progress: 90,
+    },
+    {
+      id: '4',
+      firstName: 'Emily',
+      lastName: 'Williams',
+      age: 37,
+      visits: 12,
+      status: 'pending',
+      progress: 60,
+    },
+  ];
+
+  // TanStack Table columns
+  const columns = [
+    columnHelper.accessor('firstName', {
+      header: 'First Name',
+      cell: info => info.getValue(),
+    }),
+    columnHelper.accessor('lastName', {
+      header: 'Last Name',
+      cell: info => info.getValue(),
+    }),
+    columnHelper.accessor('age', {
+      header: 'Age',
+      cell: info => info.getValue(),
+    }),
+    columnHelper.accessor('visits', {
+      header: 'Visits',
+      cell: info => info.getValue(),
+    }),
+    columnHelper.accessor('status', {
+      header: 'Status',
+      cell: info => {
+        const status = info.getValue();
+        return (
+          <Badge className={
+            status === 'active' ? 'bg-green-100 text-green-800' : 
+            status === 'inactive' ? 'bg-gray-100 text-gray-800' : 
+            'bg-yellow-100 text-yellow-800'
+          }>
+            {status}
+          </Badge>
+        );
+      },
+    }),
+    columnHelper.accessor('progress', {
+      header: 'Profile Progress',
+      cell: info => {
+        const progress = info.getValue();
+        return (
+          <div className="w-full">
+            <div className="flex justify-between mb-1 text-xs">
+              <span>{progress}%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div 
+                className="bg-blue-600 h-2 rounded-full" 
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        );
+      },
+    }),
+  ];
+
+  // Initialize TanStack Table
+  const table = useReactTable({
+    data: tanStackData,
+    columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
+
+  // AG Grid column definitions
+  const agGridColumnDefs = [
+    { field: 'product', filter: true, sortable: true },
+    { field: 'price', filter: true, sortable: true },
+    { field: 'quantity', filter: true, sortable: true },
+    { field: 'total', filter: true, sortable: true },
+    { 
+      field: 'status', 
+      filter: true, 
+      sortable: true,
+      cellRenderer: (params: any) => {
+        const status = params.value;
+        return (
+          <Badge className={
+            status === 'Completed' ? 'bg-green-100 text-green-800' : 
+            status === 'Processing' ? 'bg-blue-100 text-blue-800' : 
+            status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
+            'bg-red-100 text-red-800'
+          }>
+            {status}
+          </Badge>
+        );
+      }
+    },
+  ];
+
+  // AG Grid row data
+  const agGridRowData = [
+    { product: 'Laptop', price: 1299, quantity: 2, total: 2598, status: 'Completed' },
+    { product: 'Smartphone', price: 699, quantity: 5, total: 3495, status: 'Processing' },
+    { product: 'Headphones', price: 149, quantity: 10, total: 1490, status: 'Pending' },
+    { product: 'Monitor', price: 349, quantity: 3, total: 1047, status: 'Completed' },
+    { product: 'Keyboard', price: 79, quantity: 12, total: 948, status: 'Cancelled' },
+    { product: 'Mouse', price: 49, quantity: 15, total: 735, status: 'Processing' },
+    { product: 'Speakers', price: 129, quantity: 4, total: 516, status: 'Pending' },
+    { product: 'Webcam', price: 89, quantity: 7, total: 623, status: 'Completed' },
+  ];
+
+  // AG Grid default column definitions
+  const agGridDefaultColDef = {
+    flex: 1,
+    minWidth: 100,
+    resizable: true,
+  };
+
   // Sample data for Recharts
   const chartData = [
     { name: 'Jan', sales: 4000, revenue: 2400, profit: 1800 },
@@ -291,9 +499,181 @@ export function DataDisplayComponents() {
           </div>
         </div>
         
+        {/* TanStack Table */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">TanStack Table</h3>
+          <div className="border rounded-md overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-gray-50">
+                {table.getHeaderGroups().map(headerGroup => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map(header => (
+                      <th 
+                        key={header.id}
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        onClick={header.column.getToggleSortingHandler()}
+                      >
+                        <div className="flex items-center space-x-1">
+                          {flexRender(header.column.columnDef.header, header.getContext())}
+                          {{
+                            asc: <ChevronUp className="h-4 w-4" />,
+                            desc: <ChevronDown className="h-4 w-4" />,
+                          }[header.column.getIsSorted() as string] ?? null}
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {table.getRowModel().rows.map(row => (
+                  <tr key={row.id} className="hover:bg-gray-50">
+                    {row.getVisibleCells().map(cell => (
+                      <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        {/* AG Grid */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">AG Grid</h3>
+          <Card>
+            <CardHeader>
+              <CardTitle>Product Inventory (AG Grid)</CardTitle>
+              <CardDescription>Powerful data grid with filtering, sorting and resizing</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
+                <AgGridReact
+                  rowData={agGridRowData}
+                  columnDefs={agGridColumnDefs}
+                  defaultColDef={agGridDefaultColDef}
+                  animateRows={true}
+                  pagination={true}
+                  paginationPageSize={5}
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        
+        {/* Avatar */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Avatars (Radix UI)</h3>
+          <div className="flex flex-wrap gap-4 items-end">
+            <div className="flex flex-col items-center gap-1.5">
+              <Avatar className="h-16 w-16">
+                <AvatarImage src="https://api.dicebear.com/7.x/adventurer/svg?seed=John" alt="John Doe" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+              <span className="text-xs text-gray-500">Large</span>
+            </div>
+            
+            <div className="flex flex-col items-center gap-1.5">
+              <Avatar className="h-12 w-12">
+                <AvatarImage src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jane" alt="Jane Smith" />
+                <AvatarFallback>JS</AvatarFallback>
+              </Avatar>
+              <span className="text-xs text-gray-500">Medium</span>
+            </div>
+            
+            <div className="flex flex-col items-center gap-1.5">
+              <Avatar className="h-8 w-8">
+                <AvatarImage src="https://api.dicebear.com/7.x/adventurer/svg?seed=Bob" alt="Bob Johnson" />
+                <AvatarFallback>BJ</AvatarFallback>
+              </Avatar>
+              <span className="text-xs text-gray-500">Small</span>
+            </div>
+            
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="flex -space-x-2">
+                <Avatar className="h-8 w-8 border-2 border-white">
+                  <AvatarImage src="https://api.dicebear.com/7.x/adventurer/svg?seed=User1" alt="User 1" />
+                  <AvatarFallback>U1</AvatarFallback>
+                </Avatar>
+                <Avatar className="h-8 w-8 border-2 border-white">
+                  <AvatarImage src="https://api.dicebear.com/7.x/adventurer/svg?seed=User2" alt="User 2" />
+                  <AvatarFallback>U2</AvatarFallback>
+                </Avatar>
+                <Avatar className="h-8 w-8 border-2 border-white">
+                  <AvatarImage src="https://api.dicebear.com/7.x/adventurer/svg?seed=User3" alt="User 3" />
+                  <AvatarFallback>U3</AvatarFallback>
+                </Avatar>
+                <Avatar className="h-8 w-8 border-2 border-white bg-gray-200">
+                  <AvatarFallback>+2</AvatarFallback>
+                </Avatar>
+              </div>
+              <span className="text-xs text-gray-500">Group</span>
+            </div>
+            
+            <div className="flex flex-col items-center gap-1.5">
+              <Avatar className="h-12 w-12 bg-primary text-white">
+                <AvatarFallback>TS</AvatarFallback>
+              </Avatar>
+              <span className="text-xs text-gray-500">Fallback</span>
+            </div>
+          </div>
+        </div>
+        
+        {/* Timeline */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Timeline (react-vertical-timeline)</h3>
+          <div className="border rounded-md p-6 bg-gray-50">
+            <VerticalTimeline layout="1-column" lineColor="#e5e7eb">
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                contentStyle={{ background: 'white', color: '#333' }}
+                contentArrowStyle={{ borderRight: '7px solid white' }}
+                date="April 2023"
+                iconStyle={{ background: '#3b82f6', color: '#fff' }}
+                icon={<CalendarDays className="text-white" />}
+              >
+                <h3 className="text-lg font-medium">Project Launched</h3>
+                <p className="text-gray-600">
+                  Initial launch of the application with core features implemented.
+                </p>
+              </VerticalTimelineElement>
+              
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                contentStyle={{ background: 'white', color: '#333' }}
+                contentArrowStyle={{ borderRight: '7px solid white' }}
+                date="June 2023"
+                iconStyle={{ background: '#10b981', color: '#fff' }}
+                icon={<Check className="text-white" />}
+              >
+                <h3 className="text-lg font-medium">Major Release v1.0</h3>
+                <p className="text-gray-600">
+                  First stable release with all planned features and comprehensive documentation.
+                </p>
+              </VerticalTimelineElement>
+              
+              <VerticalTimelineElement
+                className="vertical-timeline-element--education"
+                contentStyle={{ background: 'white', color: '#333' }}
+                contentArrowStyle={{ borderRight: '7px solid white' }}
+                date="September 2023"
+                iconStyle={{ background: '#8b5cf6', color: '#fff' }}
+                icon={<BookOpen className="text-white" />}
+              >
+                <h3 className="text-lg font-medium">Documentation Update</h3>
+                <p className="text-gray-600">
+                  Comprehensive update to documentation including tutorials and API references.
+                </p>
+              </VerticalTimelineElement>
+            </VerticalTimeline>
+          </div>
+        </div>
+        
         {/* Badges */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Badges & Pills</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Badges & Pills (ShadCN)</h3>
           <div className="flex flex-wrap gap-2">
             <Badge variant="outline" className="bg-primary-50 text-primary-800 border-primary-200">Default</Badge>
             <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">Success</Badge>

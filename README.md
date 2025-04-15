@@ -62,7 +62,14 @@ This template provides a collection of carefully selected UI components using be
 ### Data Display
 | Component | Library Used | Why |
 |-----------|--------------|-----|
+| Table | TanStack Table | Best-in-class logic and performance |
+| Data Grid | AG Grid | Excel-like powerful grid |
+| List (Virtual) | react-virtual | Virtual scrolling for massive data |
 | Charts | Recharts | Responsive, customizable charts built on D3 |
+| Badge / Pill | ShadCN | Easy styling |
+| Avatar | Radix UI | Graceful fallback support |
+| Card | ShadCN | Great base structure |
+| Timeline | react-vertical-timeline | Visual storytelling or activity feeds |
 
 ### Media Components
 | Component | Library Used | Why |
