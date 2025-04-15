@@ -20,6 +20,26 @@
           );
         }
       }(window.location))
+      
+      // Redirect script that checks if we've been redirected here from a 404
+      (function() {
+        if (sessionStorage.redirect) {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          
+          // Extract the path from the redirect URL
+          const url = new URL(redirect);
+          const path = url.pathname.replace(/^\/[^\/]+/, '');
+          
+          // Check if there is a hash in the URL
+          if (url.hash) {
+            history.replaceState(null, null, url.hash);
+          } else {
+            // Otherwise, redirect to the path directly
+            history.replaceState(null, null, path || '/');
+          }
+        }
+      })();
     </script>
   </head>
   <body>
