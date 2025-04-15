@@ -20,6 +20,8 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "static-build"),
     emptyOutDir: true,
   },
-  // Base path for assets in production
+  // Base path for assets in production (for GitHub Pages - use repo name if not using custom domain)
+  // If you're using a custom domain or deploying to username.github.io, you can use "/"
+  // For project repositories (username.github.io/repo-name), use "/repo-name/"
   base: "./",
 });

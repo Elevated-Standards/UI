@@ -241,6 +241,51 @@ http://localhost:5000
 - `npm run dev` - Start the development server
 - `npm run build` - Build for production
 - `npm run start` - Start the production server
+- `./build-static.sh` - Build as a static website for deployment to GitHub Pages or other static hosts
+
+## 📤 Deployment to GitHub Pages
+
+This project is configured for easy deployment to GitHub Pages using GitHub Actions.
+
+### Automated Deployment
+
+1. Push your code to a GitHub repository
+2. Enable GitHub Pages in your repository settings:
+   - Go to Settings > Pages
+   - Under "Build and deployment", select "GitHub Actions" as the source
+3. The GitHub Action workflow will automatically build and deploy your site when you push to the main branch
+
+### Manual Deployment
+
+If you prefer to deploy manually:
+
+1. Build the static website
+```bash
+./build-static.sh
+```
+
+2. The built files will be in the `static-build` directory
+3. You can deploy these files to any static hosting provider, including:
+   - GitHub Pages
+   - Netlify
+   - Vercel
+   - Firebase Hosting
+   - Amazon S3
+
+### Setting the Base URL
+
+If you're deploying to a subdirectory (e.g., `username.github.io/repo-name`), you'll need to update the `base` property in `vite.config.static.ts`:
+
+```typescript
+// For project repositories (username.github.io/repo-name)
+base: "/your-repo-name/",
+```
+
+If you're using a custom domain or deploying to the root of GitHub Pages (e.g., `username.github.io`), you can use:
+
+```typescript
+base: "/",
+```
 
 ## 📚 Component Showcase
 
