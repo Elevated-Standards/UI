@@ -32,6 +32,7 @@ import {
   Line 
 } from 'recharts';
 import { AgGridReact } from 'ag-grid-react';
+import { ClientSideRowModelModule } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import {
@@ -172,14 +173,23 @@ export function DataDisplayComponents() {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  // Define the type for AG Grid row data
+  type AgGridRowData = {
+    product: string;
+    price: number;
+    quantity: number;
+    total: number;
+    status: string;
+  }
+
   // AG Grid column definitions
   const agGridColumnDefs = [
-    { field: 'product', filter: true, sortable: true },
-    { field: 'price', filter: true, sortable: true },
-    { field: 'quantity', filter: true, sortable: true },
-    { field: 'total', filter: true, sortable: true },
+    { field: 'product' as keyof AgGridRowData, filter: true, sortable: true },
+    { field: 'price' as keyof AgGridRowData, filter: true, sortable: true },
+    { field: 'quantity' as keyof AgGridRowData, filter: true, sortable: true },
+    { field: 'total' as keyof AgGridRowData, filter: true, sortable: true },
     { 
-      field: 'status', 
+      field: 'status' as keyof AgGridRowData, 
       filter: true, 
       sortable: true,
       cellRenderer: (params: any) => {
@@ -555,6 +565,7 @@ export function DataDisplayComponents() {
                   columnDefs={agGridColumnDefs}
                   defaultColDef={agGridDefaultColDef}
                   animateRows={true}
+                  modules={[ClientSideRowModelModule]}
                   pagination={true}
                   paginationPageSize={5}
                 />
