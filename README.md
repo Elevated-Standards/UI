@@ -76,6 +76,14 @@ This template provides a collection of carefully selected UI components using be
 |-----------|--------------|-----|
 | Video Player | ReactPlayer | Support for multiple video sources (YouTube, Vimeo, local files) |
 
+### Utilities & Helpers
+| Component | Library Used | Why |
+|-----------|--------------|-----|
+| Icons | Lucide | Modern SVG icons |
+| Animations | Framer Motion | Most elegant animation API in React |
+| Skeleton Loader | Chakra UI | Graceful loading states |
+| Theming | NextThemes | Easy toggling and dark/light theme state |
+
 ### Internationalization
 | Component | Library Used | Why |
 |-----------|--------------|-----|
