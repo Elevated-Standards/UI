@@ -2,7 +2,10 @@ import React, { useState, useRef } from "react";
 import { SectionContainer } from "./section-container";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
-import { X, CheckCircle } from "lucide-react";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger, ContextMenuSeparator, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger } from "@/components/ui/context-menu";
+import { X, CheckCircle, AlertTriangle, Settings, FilePen, Copy, PlusCircle, Trash } from "lucide-react";
 import { useFloating, arrow, offset, flip, shift, useHover, useFocus, useDismiss, useRole, useInteractions, FloatingArrow } from "@floating-ui/react";
 import { toast, Toaster } from "sonner";
 
@@ -73,9 +76,9 @@ export function OverlayComponents() {
       description="Modal dialogs, tooltips, and notification components"
     >
       <div className="space-y-8">
-        {/* Modal / Dialog */}
+        {/* Modal / Dialog from Radix UI */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Modal / Dialog</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Modal / Dialog (Radix UI Dialog)</h3>
           <div className="p-4 border border-gray-200 rounded-md">
             <div className="flex justify-center">
               <Dialog>
@@ -84,14 +87,26 @@ export function OverlayComponents() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>Dialog Title</DialogTitle>
+                    <DialogTitle>Edit Profile</DialogTitle>
                     <DialogDescription>
-                      This is an example dialog. In a real implementation, this would appear as an overlay when the button is clicked.
+                      Make changes to your profile information. Click save when you're done.
                     </DialogDescription>
                   </DialogHeader>
+                  <div className="py-4">
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <label htmlFor="name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Name</label>
+                        <input id="name" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background" />
+                      </div>
+                      <div className="space-y-2">
+                        <label htmlFor="username" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Username</label>
+                        <input id="username" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background" />
+                      </div>
+                    </div>
+                  </div>
                   <DialogFooter className="sm:justify-end">
                     <Button type="button" variant="secondary">Cancel</Button>
-                    <Button type="button">Confirm</Button>
+                    <Button type="button">Save Changes</Button>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
@@ -99,7 +114,103 @@ export function OverlayComponents() {
           </div>
         </div>
         
-        {/* Tooltip using Floating UI as per requirements */}
+        {/* Popover from Floating UI */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Popover (Floating UI)</h3>
+          <div className="p-4 border border-gray-200 rounded-md flex justify-center">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline">Open Popover</Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Dimensions</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Set the dimensions for the layer.
+                    </p>
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <label htmlFor="width" className="text-sm">Width</label>
+                      <input id="width" defaultValue="100%" className="col-span-2 h-8 rounded-md border border-input bg-transparent px-3 py-1 text-sm" />
+                    </div>
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <label htmlFor="height" className="text-sm">Height</label>
+                      <input id="height" defaultValue="25px" className="col-span-2 h-8 rounded-md border border-input bg-transparent px-3 py-1 text-sm" />
+                    </div>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+        </div>
+        
+        {/* Alert Dialog from Radix UI */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Alert Dialog (Radix UI AlertDialog)</h3>
+          <div className="p-4 border border-gray-200 rounded-md flex justify-center">
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive">Delete Account</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete your account
+                    and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction>Continue</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+        </div>
+        
+        {/* Context Menu from Radix UI */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Context Menu (Radix UI ContextMenu)</h3>
+          <div className="p-4 border border-gray-200 rounded-md flex justify-center">
+            <ContextMenu>
+              <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+                Right click here to open the context menu
+              </ContextMenuTrigger>
+              <ContextMenuContent className="w-64">
+                <ContextMenuItem className="flex items-center gap-2">
+                  <FilePen className="h-4 w-4" /> Edit
+                </ContextMenuItem>
+                <ContextMenuItem className="flex items-center gap-2">
+                  <Copy className="h-4 w-4" /> Duplicate
+                </ContextMenuItem>
+                <ContextMenuSeparator />
+                <ContextMenuSub>
+                  <ContextMenuSubTrigger className="flex items-center gap-2">
+                    <Settings className="h-4 w-4" /> Settings
+                  </ContextMenuSubTrigger>
+                  <ContextMenuSubContent className="w-48">
+                    <ContextMenuItem>Profile</ContextMenuItem>
+                    <ContextMenuItem>Billing</ContextMenuItem>
+                    <ContextMenuItem>Team</ContextMenuItem>
+                    <ContextMenuItem>Subscription</ContextMenuItem>
+                  </ContextMenuSubContent>
+                </ContextMenuSub>
+                <ContextMenuSeparator />
+                <ContextMenuItem className="flex items-center gap-2">
+                  <PlusCircle className="h-4 w-4" /> Add New
+                </ContextMenuItem>
+                <ContextMenuItem className="flex items-center gap-2 text-red-500">
+                  <Trash className="h-4 w-4" /> Delete
+                </ContextMenuItem>
+              </ContextMenuContent>
+            </ContextMenu>
+          </div>
+        </div>
+        
+        {/* Tooltip using Floating UI */}
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-gray-900">Tooltip (Floating UI)</h3>
           <div className="flex justify-center">
@@ -107,7 +218,7 @@ export function OverlayComponents() {
           </div>
         </div>
         
-        {/* Toast - using Sonner as per requirements */}
+        {/* Toast - using Sonner */}
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-gray-900">Toast Notification (Sonner)</h3>
           <div className="flex justify-center space-x-4">

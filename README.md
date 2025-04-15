@@ -52,6 +52,10 @@ This template provides a collection of carefully selected UI components using be
 ### Overlay Components
 | Component | Library Used | Why |
 |-----------|--------------|-----|
+| Modal / Dialog | Radix UI Dialog | Keyboard traps, animations, accessible |
+| Popover | Floating UI | Complex interactions supported |
+| Alert Dialog | Radix UI AlertDialog | Full a11y handling |
+| Context Menu | Radix UI ContextMenu | Custom right-click menus |
 | Tooltip | Floating UI | Lightweight tooltip positioning with excellent customization |
 | Toast Notifications | Sonner | Clean, minimal toast notifications with action support |
 
