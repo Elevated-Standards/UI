@@ -1,6 +1,7 @@
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Layout } from "@/components/ui-showcase/layout";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
 
@@ -34,7 +35,9 @@ function Router() {
 function App() {
   return (
     <ThemeProvider>
-      <Router />
+      <Layout>
+        <Router />
+      </Layout>
       <Toaster />
     </ThemeProvider>
   );

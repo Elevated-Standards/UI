@@ -11,7 +11,7 @@ interface ComponentLayoutProps {
 
 export function ComponentLayout({ title, description, children }: ComponentLayoutProps) {
   return (
-    <div className="container py-8 max-w-6xl mx-auto">
+    <div className="container py-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="mb-8">
         <Button variant="ghost" size="sm" asChild className="mb-4">
           <Link to="/">
@@ -23,7 +23,7 @@ export function ComponentLayout({ title, description, children }: ComponentLayou
         <p className="mt-2 text-muted-foreground">{description}</p>
       </div>
       
-      <div>
+      <div className="bg-card rounded-lg border p-6">
         {children}
       </div>
     </div>

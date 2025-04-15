@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/ui-showcase/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 import { 
   FileText, 
   ScrollText, 

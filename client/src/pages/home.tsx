@@ -92,7 +92,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="container py-8 max-w-6xl mx-auto">
+    <div className="container py-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Hero section */}
       <section className="py-12 text-center">
         <Badge variant="outline" className="mb-4 px-3 py-1 text-sm font-medium">Comprehensive UI Toolkit</Badge>
