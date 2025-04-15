@@ -24,7 +24,7 @@ export function UtilityComponents() {
       <div className="space-y-8">
         {/* Icons - Lucide */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Icons (Lucide)</h3>
+          <h3 className="text-lg font-semibold">Icons (Lucide)</h3>
           <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600">
@@ -79,7 +79,7 @@ export function UtilityComponents() {
         
         {/* Animations - Framer Motion */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Animations (Framer Motion)</h3>
+          <h3 className="text-lg font-semibold">Animations (Framer Motion)</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Simple Animation */}
             <Card>
@@ -159,7 +159,7 @@ export function UtilityComponents() {
         
         {/* Skeleton Loader - Chakra UI inspired */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Skeleton Loader (Chakra UI inspired)</h3>
+          <h3 className="text-lg font-semibold">Skeleton Loader (Chakra UI inspired)</h3>
           <div className="flex items-center mb-4">
             <Button 
               variant="outline" 
@@ -260,7 +260,7 @@ export function UtilityComponents() {
         
         {/* Theme Toggle - NextThemes */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Theme Toggle (NextThemes)</h3>
+          <h3 className="text-lg font-semibold">Theme Toggle (NextThemes)</h3>
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
