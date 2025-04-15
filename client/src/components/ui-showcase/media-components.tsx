@@ -1,110 +1,157 @@
-import React from "react";
+import React, { useState } from "react";
 import { SectionContainer } from "./section-container";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Play, Volume2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import ReactPlayer from "react-player/lazy";
+import ReactPlayer from "react-player";
 
 export function MediaComponents() {
+  // Sample gallery photos - using placeholder images
+  const photos = [
+    {
+      src: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+      width: 4,
+      height: 3,
+      title: "Breakfast",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+      width: 4,
+      height: 3,
+      title: "Burger",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+      width: 4,
+      height: 3,
+      title: "Camera",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+      width: 4,
+      height: 3,
+      title: "Coffee",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+      width: 3,
+      height: 4,
+      title: "Hats",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+      width: 4,
+      height: 3,
+      title: "Honey",
+    },
+  ];
+
+  // Sample video URLs
+  const videoSources = {
+    mp4: "https://www.w3schools.com/html/mov_bbb.mp4",
+    youtube: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+    vimeo: "https://vimeo.com/243556536",
+  };
+
+  // Sample audio URL
+  const audioSources = {
+    mp3: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  };
+
   return (
-    <SectionContainer 
-      id="media" 
-      title="Media Components" 
-      description="Components for multimedia content"
+    <SectionContainer
+      id="media"
+      title="Media Components"
+      description="Components for displaying and interacting with media content"
     >
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Image Gallery */}
-        <div className="space-y-3">
-          <h3 className="text-md font-semibold text-gray-900">Image Gallery</h3>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="overflow-hidden rounded-md">
-              <AspectRatio ratio={1/1}>
-                <img 
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
-                  alt="Mountain landscape" 
-                  className="w-full h-full object-cover"
-                />
-              </AspectRatio>
-            </div>
-            <div className="overflow-hidden rounded-md">
-              <AspectRatio ratio={1/1}>
-                <img 
-                  src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6" 
-                  alt="Ocean view" 
-                  className="w-full h-full object-cover"
-                />
-              </AspectRatio>
-            </div>
-            <div className="overflow-hidden rounded-md">
-              <AspectRatio ratio={1/1}>
-                <img 
-                  src="https://images.unsplash.com/photo-1500382017468-9049fed747ef" 
-                  alt="Forest landscape" 
-                  className="w-full h-full object-cover"
-                />
-              </AspectRatio>
-            </div>
-            <div className="overflow-hidden rounded-md">
-              <AspectRatio ratio={1/1}>
-                <img 
-                  src="https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6" 
-                  alt="Desert landscape" 
-                  className="w-full h-full object-cover"
-                />
-              </AspectRatio>
-            </div>
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">Image Gallery</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {photos.map((photo, index) => (
+              <Card key={index} className="overflow-hidden">
+                <AspectRatio ratio={photo.width / photo.height}>
+                  <img
+                    src={photo.src}
+                    alt={photo.title}
+                    className="object-cover w-full h-full"
+                  />
+                </AspectRatio>
+                <CardContent className="p-2">
+                  <p className="text-sm font-medium">{photo.title}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
-        
-        {/* Video Player - using ReactPlayer as per requirements */}
-        <div className="space-y-3">
-          <h3 className="text-md font-semibold text-gray-900">Video Player (ReactPlayer)</h3>
-          <div className="rounded-md overflow-hidden border border-gray-200">
-            <AspectRatio ratio={16/9} className="bg-black">
-              <ReactPlayer
-                url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-                width="100%"
-                height="100%"
-                controls={true}
-                light="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7"
-                playIcon={
-                  <Button variant="outline" size="icon" className="h-16 w-16 rounded-full bg-white bg-opacity-75 text-primary hover:bg-opacity-100 transition-colors border-0">
-                    <Play className="h-8 w-8 ml-1" />
-                  </Button>
-                }
-              />
-            </AspectRatio>
-          </div>
-          <div className="mt-4">
-            <h4 className="text-sm font-medium text-gray-900 mb-1">Features:</h4>
-            <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
-              <li>Supports YouTube, Facebook, Twitch, SoundCloud, Streamable, Vimeo, Wistia, and file URLs</li>
-              <li>Responsive design with customizable controls</li>
-              <li>Lazy loading for better performance</li>
-              <li>Custom thumbnail support with light prop</li>
-            </ul>
-          </div>
+
+        {/* Video Player */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">Video Player</h3>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-md">ReactPlayer</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="mp4">
+                <TabsList>
+                  <TabsTrigger value="mp4">MP4</TabsTrigger>
+                  <TabsTrigger value="youtube">YouTube</TabsTrigger>
+                  <TabsTrigger value="vimeo">Vimeo</TabsTrigger>
+                </TabsList>
+                <TabsContent value="mp4" className="w-full mt-4">
+                  <div className="w-full aspect-video">
+                    <ReactPlayer
+                      url={videoSources.mp4}
+                      controls
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
+                </TabsContent>
+                <TabsContent value="youtube" className="w-full mt-4">
+                  <div className="w-full aspect-video">
+                    <ReactPlayer
+                      url={videoSources.youtube}
+                      controls
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
+                </TabsContent>
+                <TabsContent value="vimeo" className="w-full mt-4">
+                  <div className="w-full aspect-video">
+                    <ReactPlayer
+                      url={videoSources.vimeo}
+                      controls
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
         </div>
-        
+
         {/* Audio Player */}
-        <div className="space-y-3">
-          <h3 className="text-md font-semibold text-gray-900">Audio Player</h3>
-          <div className="bg-gray-100 rounded-md p-4">
-            <div className="flex items-center space-x-4">
-              <Button size="icon" className="rounded-full bg-primary h-10 w-10 flex items-center justify-center text-white">
-                <Play className="h-5 w-5 ml-0.5" />
-              </Button>
-              <div className="flex-1">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-sm font-medium text-gray-900">Audio Title</span>
-                  <span className="text-xs text-gray-500">1:23 / 3:45</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5">
-                  <div className="bg-primary h-1.5 rounded-full" style={{ width: "35%" }}></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">Audio Player</h3>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-md">HTML5 Audio Player</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <audio
+                className="w-full"
+                controls
+                src={audioSources.mp3}
+              >
+                Your browser does not support the audio element.
+              </audio>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </SectionContainer>
