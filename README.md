@@ -1,6 +1,6 @@
 # Elevated Standards
 
-Our ollection of UI components from best-in-class libraries for standardized, rapid application development.
+Our collection of UI components from best-in-class libraries for standardized, rapid application development.
 
 ## 🚀 Overview
 
