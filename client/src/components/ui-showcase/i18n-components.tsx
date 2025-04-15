@@ -122,7 +122,7 @@ export function I18nComponents() {
           <div className="mt-4">
             <h3 className="font-semibold">{t('features.title')}</h3>
             <ul className="list-disc pl-5 mt-2">
-              {t('features.items', { returnObjects: true }).map((item, index) => (
+              {(t('features.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
                 <li key={index} className="text-gray-700">{item}</li>
               ))}
             </ul>

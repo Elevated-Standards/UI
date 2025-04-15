@@ -20,8 +20,18 @@ This template provides a collection of carefully selected UI components using be
 ### Form Components
 | Component | Library Used | Why |
 |-----------|--------------|-----|
-| File Upload | react-dropzone | Flexible drag-and-drop functionality with excellent customization |
-| Form Validation | Zod + React Hook Form | Schema-based validation with excellent TypeScript support |
+| Input (text, number) | Radix UI | Customizable, accessible, clean design |
+| Textarea | Chakra UI (inspired) | Auto-resizing with good defaults |
+| Checkbox | Radix UI Checkbox | Headless, accessible implementation |
+| Radio Group | Radix UI | Keyboard navigation, clean design |
+| Select (Dropdown) | React Aria Select | Full accessibility and i18n support |
+| Combobox / Autocomplete | Downshift | Headless logic with flexible integration |
+| Date Picker | React DayPicker | Support for single date, range, calendar views |
+| Time Picker | react-time-picker | Simple, focused, works well |
+| Color Picker | react-colorful | Small, fast, accessible implementation |
+| Slider | Radix UI Slider | Accessible and highly designable |
+| File Upload | react-dropzone | Flexible drag-and-drop functionality |
+| Form Validation | Zod + React Hook Form | Schema-based validation with TypeScript support |
 
 ### Overlay Components
 | Component | Library Used | Why |
