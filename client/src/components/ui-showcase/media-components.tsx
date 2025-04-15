@@ -56,24 +56,33 @@ export function MediaComponents() {
           </div>
         </div>
         
-        {/* Video Player */}
+        {/* Video Player - using ReactPlayer as per requirements */}
         <div className="space-y-3">
-          <h3 className="text-md font-semibold text-gray-900">Video Player</h3>
-          <div className="rounded-md overflow-hidden">
-            <AspectRatio ratio={16/9} className="bg-black relative">
-              {/* Video placeholder */}
-              <div className="absolute inset-0 flex items-center justify-center z-10">
-                <Button variant="outline" size="icon" className="h-16 w-16 rounded-full bg-white bg-opacity-75 text-primary hover:bg-opacity-100 transition-colors border-0">
-                  <Play className="h-8 w-8 ml-1" />
-                </Button>
-              </div>
-              {/* Video thumbnail */}
-              <img 
-                src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7" 
-                alt="Video thumbnail" 
-                className="w-full h-full object-cover opacity-60"
+          <h3 className="text-md font-semibold text-gray-900">Video Player (ReactPlayer)</h3>
+          <div className="rounded-md overflow-hidden border border-gray-200">
+            <AspectRatio ratio={16/9} className="bg-black">
+              <ReactPlayer
+                url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+                width="100%"
+                height="100%"
+                controls={true}
+                light="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7"
+                playIcon={
+                  <Button variant="outline" size="icon" className="h-16 w-16 rounded-full bg-white bg-opacity-75 text-primary hover:bg-opacity-100 transition-colors border-0">
+                    <Play className="h-8 w-8 ml-1" />
+                  </Button>
+                }
               />
             </AspectRatio>
+          </div>
+          <div className="mt-4">
+            <h4 className="text-sm font-medium text-gray-900 mb-1">Features:</h4>
+            <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+              <li>Supports YouTube, Facebook, Twitch, SoundCloud, Streamable, Vimeo, Wistia, and file URLs</li>
+              <li>Responsive design with customizable controls</li>
+              <li>Lazy loading for better performance</li>
+              <li>Custom thumbnail support with light prop</li>
+            </ul>
           </div>
         </div>
         
