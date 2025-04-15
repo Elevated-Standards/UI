@@ -1,0 +1,38 @@
+import React from "react";
+import { ComponentSection } from "@/types/demo";
+import { cn } from "@/lib/utils";
+import { LayoutGrid } from "lucide-react";
+
+interface SidebarProps {
+  sections: ComponentSection[];
+}
+
+export function Sidebar({ sections }: SidebarProps) {
+  return (
+    <div className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 shadow-sm overflow-y-auto">
+      <div className="p-6 border-b border-gray-200">
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+            <LayoutGrid className="h-5 w-5 text-white" />
+          </div>
+          <h1 className="text-lg font-bold">Component Library</h1>
+        </div>
+      </div>
+      <nav className="p-4 space-y-1">
+        {sections.map((section) => (
+          <a
+            key={section.id}
+            href={`#${section.id}`}
+            className={cn(
+              "flex items-center space-x-2 px-3 py-2 rounded-md",
+              "hover:bg-gray-100 text-gray-700 font-medium"
+            )}
+          >
+            {section.icon}
+            <span>{section.title}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  );
+}
