@@ -1,8 +1,9 @@
 import React from "react";
 import { SectionContainer } from "./section-container";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Play } from "lucide-react";
+import { Play, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ReactPlayer from "react-player/lazy";
 
 export function MediaComponents() {
   return (

@@ -1,12 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { SectionContainer } from "./section-container";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { X, CheckCircle } from "lucide-react";
+import { useFloating, arrow, offset, flip, shift, useHover, useFocus, useDismiss, useRole, useInteractions, FloatingArrow } from "@floating-ui/react";
+import { toast, Toaster } from "sonner";
+
+// Floating UI tooltip component
+function FloatingTooltip() {
+  const [isOpen, setIsOpen] = useState(false);
+  const arrowRef = useRef(null);
+
+  const {x, y, strategy, refs, context} = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    middleware: [
+      offset(10),
+      flip(),
+      shift(),
+      arrow({ element: arrowRef })
+    ],
+  });
+
+  const hover = useHover(context, { move: false });
+  const focus = useFocus(context);
+  const dismiss = useDismiss(context);
+  const role = useRole(context, { role: "tooltip" });
+
+  // Merge all the interactions into prop getters
+  const {getReferenceProps, getFloatingProps} = useInteractions([
+    hover,
+    focus,
+    dismiss,
+    role
+  ]);
+
+  return (
+    <div>
+      <Button 
+        variant="outline" 
+        ref={refs.setReference} 
+        {...getReferenceProps()}
+      >
+        Hover over me (Floating UI)
+      </Button>
+      {isOpen && (
+        <div
+          ref={refs.setFloating}
+          style={{
+            position: strategy,
+            top: y ?? 0,
+            left: x ?? 0,
+            width: 'max-content',
+          }}
+          className="bg-black text-white text-sm px-3 py-2 rounded-md z-50"
+          {...getFloatingProps()}
+        >
+          This is a Floating UI tooltip
+          <FloatingArrow ref={arrowRef} context={context} fill="black" />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function OverlayComponents() {
-  const [showToast, setShowToast] = useState(false);
 
   return (
     <SectionContainer 
@@ -41,57 +99,56 @@ export function OverlayComponents() {
           </div>
         </div>
         
-        {/* Tooltip */}
+        {/* Tooltip using Floating UI as per requirements */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Tooltip</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Tooltip (Floating UI)</h3>
           <div className="flex justify-center">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline">Hover over me</Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>This is a tooltip</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <FloatingTooltip />
           </div>
         </div>
         
-        {/* Toast */}
+        {/* Toast - using Sonner as per requirements */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Toast Notification</h3>
-          <div className="flex justify-end space-x-4">
-            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto border border-gray-200">
-              <div className="p-4">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <CheckCircle className="h-6 w-6 text-green-400" />
-                  </div>
-                  <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900">Success!</p>
-                    <p className="mt-1 text-sm text-gray-500">Your changes have been saved successfully.</p>
-                  </div>
-                  <div className="ml-4 flex-shrink-0 flex">
-                    <Button variant="ghost" size="icon" className="h-5 w-5 p-0">
-                      <span className="sr-only">Close</span>
-                      <X className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-center">
+          <h3 className="text-lg font-semibold text-gray-900">Toast Notification (Sonner)</h3>
+          <div className="flex justify-center space-x-4">
             <Button 
               variant="outline" 
               onClick={() => {
-                setShowToast(true);
-                setTimeout(() => setShowToast(false), 3000);
+                toast.success('Changes saved successfully', {
+                  description: 'Your changes have been saved to the database.',
+                  action: {
+                    label: 'Undo',
+                    onClick: () => console.log('Undo changes')
+                  },
+                });
               }}
             >
-              Show Toast Notification
+              Success Toast
             </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                toast.error('Error occurred', {
+                  description: 'There was a problem saving your changes.',
+                });
+              }}
+            >
+              Error Toast
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                toast('Notification', {
+                  description: 'This is a neutral notification message.',
+                });
+              }}
+            >
+              Info Toast
+            </Button>
+          </div>
+          <div className="mt-4">
+            {/* Sonner component for rendering toasts */}
+            <Toaster position="bottom-right" />
           </div>
         </div>
       </div>

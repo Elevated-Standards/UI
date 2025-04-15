@@ -4,10 +4,22 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { User, ChevronUp } from "lucide-react";
+import { User, ChevronUp, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, LineChart, Line } from 'recharts';
 
 export function DataDisplayComponents() {
+  // Sample data for Recharts
+  const chartData = [
+    { name: 'Jan', sales: 4000, revenue: 2400, profit: 1800 },
+    { name: 'Feb', sales: 3000, revenue: 1398, profit: 1200 },
+    { name: 'Mar', sales: 2000, revenue: 9800, profit: 1900 },
+    { name: 'Apr', sales: 2780, revenue: 3908, profit: 2200 },
+    { name: 'May', sales: 1890, revenue: 4800, profit: 2500 },
+    { name: 'Jun', sales: 2390, revenue: 3800, profit: 2000 },
+    { name: 'Jul', sales: 3490, revenue: 4300, profit: 2100 },
+  ];
+
   return (
     <SectionContainer 
       id="data-display" 
@@ -151,6 +163,130 @@ export function DataDisplayComponents() {
               <CardFooter className="border-t bg-gray-50 flex justify-end items-center">
                 <Button variant="ghost" className="text-sm font-medium text-primary hover:text-primary-700 h-auto p-0">Download Report</Button>
               </CardFooter>
+            </Card>
+          </div>
+        </div>
+        
+        {/* Charts using Recharts as per requirements */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Charts (Recharts)</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Bar Chart */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-md">Monthly Sales (Bar Chart)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-80">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsBarChart
+                      data={chartData}
+                      margin={{
+                        top: 20,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Bar dataKey="sales" fill="#8884d8" />
+                      <Bar dataKey="revenue" fill="#82ca9d" />
+                    </RechartsBarChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Line Chart */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-md">Profit Trends (Line Chart)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-80">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                      data={chartData}
+                      margin={{
+                        top: 20,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Line 
+                        type="monotone" 
+                        dataKey="profit" 
+                        stroke="#8884d8" 
+                        activeDot={{ r: 8 }} 
+                      />
+                      <Line 
+                        type="monotone" 
+                        dataKey="revenue" 
+                        stroke="#82ca9d" 
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Area Chart */}
+            <Card className="lg:col-span-2">
+              <CardHeader>
+                <CardTitle className="text-md">Revenue Overview (Area Chart)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-80">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                      data={chartData}
+                      margin={{
+                        top: 20,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Area 
+                        type="monotone" 
+                        dataKey="sales" 
+                        stackId="1" 
+                        stroke="#8884d8" 
+                        fill="#8884d8" 
+                      />
+                      <Area 
+                        type="monotone" 
+                        dataKey="revenue" 
+                        stackId="1" 
+                        stroke="#82ca9d" 
+                        fill="#82ca9d" 
+                      />
+                      <Area 
+                        type="monotone" 
+                        dataKey="profit" 
+                        stackId="1" 
+                        stroke="#ffc658" 
+                        fill="#ffc658" 
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
             </Card>
           </div>
         </div>
