@@ -96,7 +96,7 @@ export default function Home() {
       {/* Hero section */}
       <section className="py-12 text-center">
         <Badge variant="outline" className="mb-4 px-3 py-1 text-sm font-medium">Comprehensive UI Toolkit</Badge>
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">React Boilerplate Template</h1>
+        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">Elevated Standards</h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
           A collection of carefully selected UI components from best-in-class libraries for rapid application development.
         </p>

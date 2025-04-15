@@ -15,7 +15,7 @@ export function Layout({ children }: LayoutProps) {
       <footer className="border-t py-6 md:py-8">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm text-muted-foreground md:text-left">
-            &copy; {new Date().getFullYear()} React Boilerplate Template. All rights reserved.
+            &copy; {new Date().getFullYear()} Elevated Standards. All rights reserved.
           </p>
           <p className="text-center text-sm text-muted-foreground md:text-right">
             Built with <a href="https://ui.shadcn.com/" className="underline" target="_blank" rel="noopener noreferrer">shadcn/ui</a> and the best React libraries

@@ -1,6 +1,6 @@
-# Hosting on GitHub Pages - Step by Step Guide
+# Hosting Elevated Standards on GitHub Pages - Step by Step Guide
 
-This guide will help you set up this project to be hosted on GitHub Pages.
+This guide will help you set up Elevated Standards to be hosted on GitHub Pages.
 
 ## Option 1: Using GitHub Actions (Recommended)
 

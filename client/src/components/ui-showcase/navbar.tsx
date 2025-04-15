@@ -41,7 +41,7 @@ export function Navbar() {
     <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
       <div className="container flex h-14 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <span className="text-xl font-bold">UI Kit</span>
+          <span className="text-xl font-bold">Elevated Standards</span>
         </Link>
 
         {/* Desktop navigation */}
