@@ -37,8 +37,8 @@ export default function Home() {
   return (
     <AppShell sections={sections}>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">UI Component Boilerplate</h1>
-        <p className="mt-2 text-gray-600">A modern, clean UI component library based on recommended libraries and best practices.</p>
+        <h1 className="text-3xl font-bold">UI Component Boilerplate</h1>
+        <p className="mt-2 text-muted-foreground">A modern, clean UI component library based on recommended libraries and best practices.</p>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
@@ -56,34 +56,34 @@ export default function Home() {
           <I18nComponents />
           
           {/* Getting Started Guide */}
-          <section className="bg-white rounded-lg shadow-sm p-6">
+          <section className="bg-card rounded-lg shadow-sm p-6">
             <div className="border-b pb-4 mb-6">
-              <h2 className="text-xl font-bold text-gray-900">Getting Started</h2>
-              <p className="text-sm text-gray-600 mt-1">Quick guide to using this boilerplate</p>
+              <h2 className="text-xl font-bold">Getting Started</h2>
+              <p className="text-sm text-muted-foreground mt-1">Quick guide to using this boilerplate</p>
             </div>
             
-            <div className="space-y-4 text-sm text-gray-700">
+            <div className="space-y-4 text-sm">
               <div className="space-y-2">
-                <h3 className="font-semibold text-gray-900">1. Install Dependencies</h3>
+                <h3 className="font-semibold">1. Install Dependencies</h3>
                 <CodeBlock code={installDependenciesCode} className="text-xs" />
               </div>
               
               <div className="space-y-2">
-                <h3 className="font-semibold text-gray-900">2. Import Components</h3>
-                <p>
+                <h3 className="font-semibold">2. Import Components</h3>
+                <p className="text-muted-foreground">
                   Import each component from the appropriate library following the documentation.
                 </p>
               </div>
               
               <div className="space-y-2">
-                <h3 className="font-semibold text-gray-900">3. Configure Theming</h3>
-                <p>
+                <h3 className="font-semibold">3. Configure Theming</h3>
+                <p className="text-muted-foreground">
                   Set up your theme configuration to match the design system shown in this boilerplate.
                 </p>
               </div>
               
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <a href="#" className="text-sm font-medium text-primary hover:text-primary-700">
+              <div className="mt-4 pt-4 border-t">
+                <a href="#" className="text-sm font-medium text-primary hover:underline">
                   View Full Documentation →
                 </a>
               </div>

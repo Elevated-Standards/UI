@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 
@@ -186,13 +187,13 @@ export function UtilityComponents() {
                 >
                   {/* Card skeleton */}
                   <div className="border rounded-lg overflow-hidden">
-                    <div className="h-40 bg-gray-200"></div>
+                    <Skeleton className="h-40 w-full" />
                     <div className="p-4 space-y-3">
-                      <div className="h-6 bg-gray-200 rounded w-2/3"></div>
+                      <Skeleton className="h-6 w-2/3" />
                       <div className="space-y-2">
-                        <div className="h-4 bg-gray-200 rounded w-full"></div>
-                        <div className="h-4 bg-gray-200 rounded w-full"></div>
-                        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-2/3" />
                       </div>
                     </div>
                   </div>
@@ -201,10 +202,10 @@ export function UtilityComponents() {
                   <div className="space-y-3">
                     {[1, 2, 3].map((i) => (
                       <div key={i} className="flex items-center space-x-4">
-                        <div className="rounded-full bg-gray-200 h-12 w-12"></div>
+                        <Skeleton className="rounded-full h-12 w-12" />
                         <div className="space-y-2 flex-1">
-                          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                          <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                          <Skeleton className="h-4 w-3/4" />
+                          <Skeleton className="h-4 w-1/2" />
                         </div>
                       </div>
                     ))}
