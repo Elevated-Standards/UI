@@ -1,10 +1,10 @@
 # Elevated Standards
 
-Our organization's official collection of UI components from best-in-class libraries for standardized, rapid application development.
+Our ollection of UI components from best-in-class libraries for standardized, rapid application development.
 
 ## 🚀 Overview
 
-Elevated Standards is our organization's official UI component library that provides a collection of carefully selected components using best-in-class libraries for each functionality type. This standardized toolkit enables rapid, consistent application development across all our projects.
+Elevated Standards is our UI component library that provides a collection of carefully selected components using best-in-class libraries for each functionality type. This standardized toolkit enables rapid, consistent application development across all our projects.
 
 ## 📋 Features
 
