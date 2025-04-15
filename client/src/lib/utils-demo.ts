@@ -65,8 +65,11 @@ function TranslatedComponent() {
   );
 }`;
 
-export const installDependenciesCode = `npm install react-hook-form zod @radix-ui/react-tabs
-@radix-ui/react-accordion react-paginate
-@floating-ui/react sonner react-dropzone
-@tanstack/react-table lucide-react framer-motion
-react-i18next i18next`;
+export const installDependenciesCode = `npm install react-hook-form zod @hookform/resolvers
+@radix-ui/react-tabs @radix-ui/react-accordion @radix-ui/react-dialog
+@radix-ui/react-select @radix-ui/react-dropdown-menu @radix-ui/react-popover
+@floating-ui/react sonner react-dropzone react-colorful react-day-picker
+@tanstack/react-table @tanstack/react-query ag-grid-react recharts
+lucide-react framer-motion react-player downshift react-vertical-timeline-component
+react-paginate react-i18next i18next tailwindcss clsx tailwind-merge
+next-themes`;

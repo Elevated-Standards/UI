@@ -171,7 +171,7 @@ export default function Home() {
         <Card className="max-w-3xl mx-auto">
           <CardHeader>
             <CardTitle>Getting Started</CardTitle>
-            <CardDescription>Quick guide to using this boilerplate</CardDescription>
+            <CardDescription>Quick guide to implementing our organization's UI standards</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
