@@ -98,7 +98,7 @@ export default function Home() {
         <Badge variant="outline" className="mb-4 px-3 py-1 text-sm font-medium">Comprehensive UI Toolkit</Badge>
         <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">Elevated Standards</h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-          A collection of carefully selected UI components from best-in-class libraries for rapid application development.
+          Our organization's official collection of UI components from best-in-class libraries for standardized, rapid application development.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Button size="lg" asChild>
